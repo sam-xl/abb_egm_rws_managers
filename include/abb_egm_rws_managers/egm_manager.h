@@ -194,6 +194,15 @@ private:
     bool updateTCPRobotJointStates(MotionData::MechanicalUnitGroup& group);
 
     /**
+     * \brief Updates the robot force torque reading.
+     *
+     * \param group for storing the force torque.
+     *
+     * \return true if any new forces/torques were read.
+     */
+    bool updateRobotForceTorqueStates(MotionData::MechanicalUnitGroup& group);
+
+    /**
      * \brief Updates the external joint states.
      *
      * \param group for storing the joint states.

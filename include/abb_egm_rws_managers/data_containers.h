@@ -418,6 +418,20 @@ struct MotionData
     bool supported_by_egm;
   };
 
+  struct ForceTorque
+  {
+    struct {
+      double x;
+      double y;
+      double z;
+    } force;
+    struct {
+      double x;
+      double y;
+      double z;
+    } torque;
+  };
+
   /**
    * \brief Motion data for a mechanical unit group.
    */
@@ -432,6 +446,11 @@ struct MotionData
      * \brief The group's mechanical units.
      */
     std::vector<MechanicalUnit> units;
+
+    /**
+     * \brief Force torque sensor readings for this group
+     */
+    ForceTorque forcetorque;
 
     /**
      * \brief Data concerning the (optional) EGM channel that could be used by the group.

@@ -145,6 +145,11 @@ bool EGMManager::Channel::read(MotionData::MechanicalUnitGroup& group)
     {
       any_new_states = true;
     }
+
+    if(updateRobotForceTorqueStates(group))
+    {
+      any_new_states = true;
+    }
   }
 
   previous_header_.CopyFrom(input_.header());
@@ -202,6 +207,34 @@ int EGMManager::Channel::countActiveExternalJoints(const MotionData::MechanicalU
   }
 
   return count;
+}
+
+bool EGMManager::Channel::updateRobotForceTorqueStates(MotionData::MechanicalUnitGroup& group)
+{
+  const auto& forcetorque{input_.forcetorque()};
+  if(forcetorque.has_force() && !forcetorque.has_torque() && forcetorque.force().has_x())
+  {
+    // Single DOF sensor
+    group.forcetorque.force.x = forcetorque.force().x();
+    return true;
+  }
+  if(!forcetorque.has_force() || !forcetorque.has_torque())
+  {
+    return false;
+  }
+  if(!forcetorque.force().has_x() || !forcetorque.force().has_y() || !forcetorque.force().has_z() ||
+    !forcetorque.torque().has_x() || !forcetorque.torque().has_y() || !forcetorque.torque().has_z())
+  {
+    return false;
+  }
+  // Six DOF sensor
+  group.forcetorque.force.x = forcetorque.force().x();
+  group.forcetorque.force.y = forcetorque.force().y();
+  group.forcetorque.force.z = forcetorque.force().z();
+  group.forcetorque.torque.x = forcetorque.torque().x();
+  group.forcetorque.torque.y = forcetorque.torque().y();
+  group.forcetorque.torque.z = forcetorque.torque().z();
+  return true;
 }
 
 bool EGMManager::Channel::updateTCPRobotJointStates(MotionData::MechanicalUnitGroup& group)
