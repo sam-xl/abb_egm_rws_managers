@@ -81,9 +81,10 @@ message RobotIndicators
 
 message OptionIndicators
 {
-  optional bool egm         = 1;
-  optional bool leadthrough = 2;
-  optional bool multimove   = 3;
+  optional bool egm          = 1;
+  optional bool leadthrough  = 2;
+  optional bool multimove    = 3;
+  optional bool forcecontrol = 4;
 }
 
 message AddInIndicators

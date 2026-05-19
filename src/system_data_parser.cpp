@@ -174,6 +174,10 @@ void SystemDataParser::parseSystemIndicators()
     {
       system_indicators->mutable_options()->set_multimove(true);
     }
+    else if(option == "661-2 Force Control Base")
+    {
+      system_indicators->mutable_options()->set_forcecontrol(true);
+    }
     else if(option == "StateMachine")
     {
       system_indicators->mutable_addins()->set_state_machine_1_0(true);

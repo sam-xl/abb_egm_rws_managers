@@ -508,6 +508,7 @@ std::string RWSManager::debugText() const
      << levelOne() << "EGM: " << boolToString(indicators.options().egm()) << "\n"
      << levelOne() << "Leadthrough: " << boolToString(indicators.options().leadthrough()) << "\n"
      << levelOne() << "MultiMove: " << boolToString(indicators.options().multimove()) << "\n"
+     << levelOne() << "ForceControlBase: " << boolToString(indicators.options().forcecontrol()) << "\n"
      << "\n"
      << "# RobotWare Add-Ins:\n"
      << levelOne() << "SmartGripper: " << boolToString(indicators.addins().smart_gripper()) << "\n"
